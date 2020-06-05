@@ -1,0 +1,23 @@
+language: node_js
+node_js:
+  - 13
+
+services:
+  - docker
+
+# Pre-testing installs
+install:
+  - echo "nothing needs to be installed"
+
+# Scripts to be run such as tests
+before_script:
+  - echo "no tests"
+
+script:
+  - docker --version # print the version for logging
+  - docker build --build-arg COOLEST_DOG_BUILDTIME=${COOLEST_DOG_BUILDTIME} -t travis-env-var-test .
+  - docker tag travis-env-var-test forsythetony/travis-env-var-test:latest
+
+after_success:
+  - echo "$DOCKERHUB_TOKEN" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+  - docker push forsythetony/travis-env-var-test

@@ -15,6 +15,7 @@ before_script:
 
   
 script:
+  - npm run build
   - docker --version # print the version for logging
   - docker build -t udagram_feed_api .
   - docker tag udagram_feed_api forsythetony/udagram_feed_api:latest

@@ -10,7 +10,7 @@ AWS.config.credentials = credentials;
 
 export const s3 = new AWS.S3({
   signatureVersion: 'v4',
-  region: c.aws_reigion,
+  region: c.aws_region,
   params: {Bucket: c.aws_media_bucket}
 });
 
@@ -44,11 +44,16 @@ export function getPutSignedUrl( key: string ){
 
     const signedUrlExpireSeconds = 60 * 5
 
-    const url = s3.getSignedUrl('putObject', {
+    let putSignedUrlConfig = {
       Bucket: c.aws_media_bucket,
       Key: key,
       Expires: signedUrlExpireSeconds
-    });
+    }
+
+    console.log(`Here's the config I'm using when getting the PUT URL -> 
+    ${JSON.stringify(putSignedUrlConfig)}`)
+
+    const url = s3.getSignedUrl('putObject', putSignedUrlConfig);
 
     return url;
 }

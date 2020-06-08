@@ -1,6 +1,7 @@
 # Personal Ignores
 www/
 .DS_Store
+load_env_vars.sh
 
 
 # Logs

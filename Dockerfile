@@ -8,17 +8,18 @@ WORKDIR /usr/src/app
 # package.json and package-lock.json
 COPY package*.json ./
 
-# We need to do some classic hoop jumping to get
-# env variables from the Jenkins environment into the
-# actual container
-ARG COOLEST_DOG_BUILDTIME=me
-ENV COOLEST_DOG=$COOLEST_DOG_BUILDTIME
-
 # Install dependencies
 RUN npm install
 
-# Copy app source
-COPY . .
+# Copy the build output folder over
+ADD ./www /usr/src/app
+
+#   Load in the environment variables. I'm currently looking to replace this
+#   by just passing them in when running
+# ENV UDAGRAM_POSTGRES_USERNAME $UDAGRAM_POSTGRES_USERNAME
+# ENV UDAGRAM_POSTGRES_PASSWORD $UDAGRAM_POSTGRES_PASSWORD
+# ENV UDAGRAM_POSTGRES_DB $UDAGRAM_POSTGRES_DB
+# ENV UDAGRAM_POSTGRES_HOST $UDAGRAM_POSTGRES_HOST
 
 # Bind the port that the image will run on
 EXPOSE 8080

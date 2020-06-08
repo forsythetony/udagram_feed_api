@@ -13,11 +13,12 @@ install:
 before_script:
   - echo "no tests"
 
+  
 script:
   - docker --version # print the version for logging
-  - docker build --build-arg COOLEST_DOG_BUILDTIME=${COOLEST_DOG_BUILDTIME} -t travis-env-var-test .
-  - docker tag travis-env-var-test forsythetony/travis-env-var-test:latest
+  - docker build -t udagram_feed_api .
+  - docker tag udagram_feed_api forsythetony/udagram_feed_api:latest
 
 after_success:
   - echo "$DOCKERHUB_TOKEN" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
-  - docker push forsythetony/travis-env-var-test
+  - docker push forsythetony/udagram_feed_api

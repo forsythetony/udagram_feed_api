@@ -7,12 +7,11 @@ services:
 
 # Pre-testing installs
 install:
-  - echo "nothing needs to be installed"
+  - npm ci
 
 # Scripts to be run such as tests
 before_script:
   - echo "no tests"
-
   
 script:
   - npm run build

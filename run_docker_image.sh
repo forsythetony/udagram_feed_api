@@ -1,4 +1,4 @@
-docker run -p 8080:8080 \
+docker run -p 8082:8080 -d \
     --env UDAGRAM_POSTGRES_USERNAME \
     --env UDAGRAM_POSTGRES_PASSWORD \
     --env UDAGRAM_POSTGRES_DB \
@@ -6,4 +6,4 @@ docker run -p 8080:8080 \
     --env AWS_REGION \
     --env AWS_PROFILE \
     --env AWS_BUCKET \
-    061f5174bbec
+    forsythetony/udagram_feed_api:latest

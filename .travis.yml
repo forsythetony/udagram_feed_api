@@ -17,8 +17,8 @@ script:
   - npm run build
   - docker --version # print the version for logging
   - docker build -t udagram_feed_api .
-  - docker tag udagram_feed_api forsythetony/udagram_feed_api:latest
+  - docker tag udagram_feed_api forsythetony/udagram_feed_api:${TRAVIS_COMMIT::8}
 
 after_success:
   - echo "$DOCKERHUB_TOKEN" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
-  - docker push forsythetony/udagram_feed_api
+  - docker push forsythetony/udagram_feed_api:${TRAVIS_COMMIT::8}

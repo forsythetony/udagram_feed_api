@@ -3,17 +3,15 @@ import { config } from './config/config';
 
 const c = config.dev;
 
-//Configure AWS
-var credentials = new AWS.SharedIniFileCredentials({profile: 'default'});
-AWS.config.credentials = credentials;
-
-
-export const s3 = new AWS.S3({
+let awsMainConfig = {
   signatureVersion: 'v4',
   region: c.aws_region,
   params: {Bucket: c.aws_media_bucket}
-});
+}
 
+console.log(`Here's the AWS config I'm using -> ${awsMainConfig}`)
+
+export const s3 = new AWS.S3(awsMainConfig);
 
 /* getGetSignedUrl generates an aws signed url to retreive an item
  * @Params
